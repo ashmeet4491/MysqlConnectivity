@@ -23,6 +23,7 @@ public class PersonRepository{
         this.connection=connection;
         createTable();
 
+
     }
 
  private static Logger logger= LoggerFactory.getLogger(PersonRepository.class);
@@ -36,7 +37,7 @@ public class PersonRepository{
 
         Statement statement =connection.createStatement();
         boolean result=statement.execute("Insert into person(id,first_name,last_name,age,dob) " +
-                "VALUES(1,'Ashmeet','Kaur',10,'1998-12-12)");
+                "VALUES(1,'Ashmeet','Kaur',10,'1998-12-12')");
         logger.info("result {}",result);
 
     } catch (SQLException e) {

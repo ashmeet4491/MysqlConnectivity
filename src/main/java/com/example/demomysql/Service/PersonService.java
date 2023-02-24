@@ -1,6 +1,7 @@
 package com.example.demomysql.Service;
 
 import com.example.demomysql.Model.Person;
+import com.example.demomysql.Repository.PersonRepository;
 import com.example.demomysql.Request.CreatePersonRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Service //defines it as a bean
 public class PersonService {
 
-
+@Autowired
+PersonRepository personRepository;
 
     public void createPerson(CreatePersonRequest personRequest){
 
@@ -26,6 +28,7 @@ public class PersonService {
             person.setAge(age);
         }
 
+        personRepository.createPerson(person);
 
     }
 
