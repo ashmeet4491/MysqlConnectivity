@@ -1,6 +1,7 @@
 package com.example.demomysql.Controller;
 
 import com.example.demomysql.Model.Person;
+import com.example.demomysql.Repository.PersonRepository;
 import com.example.demomysql.Request.CreatePersonRequest;
 import com.example.demomysql.Service.PersonService;
 import lombok.ToString;
@@ -12,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -43,6 +41,20 @@ public class PersonController
 
      //   return  new ResponseEntity<>(new Person(), HttpStatus.CREATED);
     }
+
+  /*  @GetMapping
+    public void getPerson(@RequestParam("id") int id)
+    {
+
+
+    }*/
+
+    @GetMapping("/allPerson")
+    public List<Person> getAllPerson()
+    {
+         return personService.getAllPerson();
+    }
+
     //Exception handler
 
 

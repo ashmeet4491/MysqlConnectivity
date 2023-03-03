@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.Temporal;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service //defines it as a bean
@@ -45,6 +46,18 @@ PersonRepository personRepository;
         return Period.between(dobDate,currentDate).getYears();
 
 
+
+    }
+
+    public void getPerson(int id)
+    {
+
+
+    }
+
+    public List<Person> getAllPerson()
+    {
+         return personRepository.getAllPerson();
 
     }
 
