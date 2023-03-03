@@ -41,10 +41,6 @@ public class PersonRepository{
     //"create table person(id int primary_key,first_name varchar(40),last_name varchar(40),age int ,dob varchar(12) );
 
     try {
-
-
-
-
         preparedStatement.setString(1,p.getFirstname());
         preparedStatement.setString(2,p.getLastname());
         preparedStatement.setInt(3,p.getAge());
@@ -127,7 +123,6 @@ public  void createTable()
     public List<Person> getAllPerson()
     {
         List<Person>ls=new ArrayList<>();
-
         Statement statement= null;
         try {
             statement = connection.createStatement();
@@ -146,6 +141,28 @@ public  void createTable()
             throw new RuntimeException(e);
         }
       return ls;
+    }
+
+    public  List<Person> deletePerson(int id)
+    {
+        List<Person>ls=new ArrayList<>();
+
+        PreparedStatement statement= null;
+        try {
+            statement = connection.prepareStatement("delete from person where id=?");
+            statement.setInt(1,id);
+            int resultSet =statement.executeUpdate();
+
+
+            /*We will be getting result in the resultset but we need it in form of List .
+             How can we do that?Result set is nothing but it is the table simply Row and coloum*/
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return ls;
+
+
     }
 
     public Person executeResultSet(ResultSet resultSet) throws SQLException {

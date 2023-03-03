@@ -49,8 +49,11 @@ PersonRepository personRepository;
 
     }
 
-    public void getPerson(int id)
+    public List<Person> deletePerson(int id)
     {
+        List<Person> list=personRepository.getPerson(id);
+         personRepository.deletePerson(id);
+         return list;
 
 
     }

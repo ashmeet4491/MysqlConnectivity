@@ -62,6 +62,13 @@ public class PersonController
 
     }
 
+
+    @DeleteMapping("/person/{id}")
+    public List<Person> deletePersonId(@PathVariable("id") int id)
+    {
+        return personService.deletePerson(id);
+
+    }
     //Exception handler
 
 
