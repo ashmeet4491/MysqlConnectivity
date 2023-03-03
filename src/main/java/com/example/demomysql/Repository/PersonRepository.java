@@ -143,24 +143,31 @@ public  void createTable()
       return ls;
     }
 
-    public  List<Person> deletePerson(int id)
+    public  boolean deletePerson(int id)
     {
-        List<Person>ls=new ArrayList<>();
+
 
         PreparedStatement statement= null;
         try {
             statement = connection.prepareStatement("delete from person where id=?");
             statement.setInt(1,id);
-            int resultSet =statement.executeUpdate();
+            int result =statement.executeUpdate();
+
+
+
+            return result>=1?true:false;
 
 
             /*We will be getting result in the resultset but we need it in form of List .
              How can we do that?Result set is nothing but it is the table simply Row and coloum*/
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e)
+        {
+
+         e.printStackTrace();
+
         }
-        return ls;
+          return false;
 
 
     }

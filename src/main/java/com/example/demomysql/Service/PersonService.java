@@ -3,16 +3,13 @@ package com.example.demomysql.Service;
 import com.example.demomysql.Model.Person;
 import com.example.demomysql.Repository.PersonRepository;
 import com.example.demomysql.Request.CreatePersonRequest;
+import com.example.demomysql.utils.BadPersonRequestExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.temporal.Temporal;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service //defines it as a bean
 public class PersonService {
@@ -49,11 +46,18 @@ PersonRepository personRepository;
 
     }
 
-    public List<Person> deletePerson(int id)
-    {
+    public List<Person> deletePerson(int id) throws BadPersonRequestExceptions {
         List<Person> list=personRepository.getPerson(id);
-         personRepository.deletePerson(id);
-         return list;
+         boolean val=personRepository.deletePerson(id);
+         if(val)
+         {
+             return list;
+         }
+
+         throw new BadPersonRequestExceptions("Wrong id");
+
+
+
 
 
     }

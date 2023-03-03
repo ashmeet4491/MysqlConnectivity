@@ -4,6 +4,7 @@ import com.example.demomysql.Model.Person;
 import com.example.demomysql.Repository.PersonRepository;
 import com.example.demomysql.Request.CreatePersonRequest;
 import com.example.demomysql.Service.PersonService;
+import com.example.demomysql.utils.BadPersonRequestExceptions;
 import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,8 +65,7 @@ public class PersonController
 
 
     @DeleteMapping("/person/{id}")
-    public List<Person> deletePersonId(@PathVariable("id") int id)
-    {
+    public List<Person> deletePersonId(@PathVariable("id") int id) throws BadPersonRequestExceptions {
         return personService.deletePerson(id);
 
     }

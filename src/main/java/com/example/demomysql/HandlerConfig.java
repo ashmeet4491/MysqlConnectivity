@@ -1,5 +1,6 @@
 package com.example.demomysql;
 
+import com.example.demomysql.utils.BadPersonRequestExceptions;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,13 @@ public class HandlerConfig
 
         List<String> errors= fieldErrors.stream().map(x->x.getDefaultMessage()).collect(Collectors.toList());
         return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadPersonRequestExceptions.class)
+    public  ResponseEntity handleBadRequestException(BadPersonRequestExceptions ex)
+    {
+        String msg=ex.getMessage();
+        return  new ResponseEntity(msg,HttpStatus.BAD_REQUEST);
     }
 
 }
