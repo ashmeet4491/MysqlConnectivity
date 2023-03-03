@@ -97,8 +97,30 @@ public  void createTable()
 
 }
 
-    public void getPerson(int id)
+    public List<Person> getPerson(int id)
     {
+        List<Person>ls=new ArrayList<>();
+
+        PreparedStatement statement= null;
+        try {
+            statement = connection.prepareStatement("Select * from person where id=?");
+            statement.setInt(1,id);
+            ResultSet resultSet =statement.executeQuery();
+
+            while(resultSet.next())
+            {
+                Person person=executeResultSet(resultSet);
+                ls.add(person);
+            }
+
+            /*We will be getting result in the resultset but we need it in form of List .
+             How can we do that?Result set is nothing but it is the table simply Row and coloum*/
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return ls;
+
 
 
     }
@@ -110,19 +132,13 @@ public  void createTable()
         try {
             statement = connection.createStatement();
             ResultSet resultSet =statement.executeQuery("Select * from Person");
-
             while(resultSet.next())
             {
-                int a=resultSet.getInt(1);
-                String b=resultSet.getString("first_name");
-                String c=resultSet.getString("last_name");
-                int d=resultSet.getInt("age");
-                String e=resultSet.getString("dob");
-
-               Person person= Person.builder().id(a).firstname(b).lastname(c).age(d).dob(e).build();
+                Person person=executeResultSet(resultSet);
                 ls.add(person);
-
             }
+
+
             /*We will be getting result in the resultset but we need it in form of List .
              How can we do that?Result set is nothing but it is the table simply Row and coloum*/
 
@@ -130,6 +146,21 @@ public  void createTable()
             throw new RuntimeException(e);
         }
       return ls;
+    }
+
+    public Person executeResultSet(ResultSet resultSet) throws SQLException {
+
+            int a=resultSet.getInt(1);
+            String b=resultSet.getString("first_name");
+            String c=resultSet.getString("last_name");
+            int d=resultSet.getInt("age");
+            String e=resultSet.getString("dob");
+
+            Person person= Person.builder().id(a).firstname(b).lastname(c).age(d).dob(e).build();
+            return  person;
+
+
+
     }
 
 }

@@ -61,5 +61,10 @@ PersonRepository personRepository;
 
     }
 
+    public List<Person> getPersonById(int id)
+    {
+        return personRepository.getPerson(id);
+    }
+
 
 }

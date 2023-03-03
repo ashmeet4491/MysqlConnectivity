@@ -55,6 +55,13 @@ public class PersonController
          return personService.getAllPerson();
     }
 
+    @GetMapping("/Person")
+    public List<Person> getPersonById(@RequestParam("id") int id)
+    {
+        return personService.getPersonById(id);
+
+    }
+
     //Exception handler
 
 
